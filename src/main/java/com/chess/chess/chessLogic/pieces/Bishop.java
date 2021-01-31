@@ -2,10 +2,12 @@ package com.chess.chess.chessLogic.pieces;
 
 import com.chess.chess.chessLogic.GameUtils;
 import com.chess.chess.chessLogic.Move;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Slf4j
 public class Bishop extends ColoredPiece {
 
     public Bishop(boolean white) {
@@ -17,6 +19,9 @@ public class Bishop extends ColoredPiece {
 
         int xDiff = move.getPrevX() - move.getX();
         int yDiff = move.getPrevY() - move.getY();
+
+        if(xDiff == 0)
+            return false;
 
         if (Math.abs(xDiff) != Math.abs(yDiff))
             return false;
@@ -32,6 +37,9 @@ public class Bishop extends ColoredPiece {
         int xDiff = move.getPrevX() - move.getX();
         int yDiff = move.getPrevY() - move.getY();
 
+        if(xDiff == 0)
+            return result;
+
         if (Math.abs(xDiff) != Math.abs(yDiff))
             return result;
 
@@ -43,6 +51,8 @@ public class Bishop extends ColoredPiece {
 
         while (i != xDiff) {
             result.add(GameUtils.xyToPos(move.getX() + i, move.getY() + j));
+            log.info(move.getX() + i + "");
+            log.info(move.getY() + j + "");
             i += iChange;
             j += jChange;
         }
